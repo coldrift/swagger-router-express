@@ -1,6 +1,6 @@
 {
   "name": "@coldrift/swagger-router-express",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Swagger router for express that supports hierarchiral middlewares",
   "private": false,
   "main": "lib/index.js",

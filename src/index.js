@@ -1,5 +1,5 @@
 
-import { forEach, get, isString, isArray, split, filter, isEmpty, map } from 'lodash';
+import { forEach, has, get, isString, isArray, split, filter, isEmpty, map } from 'lodash';
 
 const setUpRoutes = (middlewareObj, router, swaggerDoc, useBasePath) => {
 
