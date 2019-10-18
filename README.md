@@ -31,7 +31,8 @@ paths:
   /test1:
     get:
       x-controller: "controller-name1.test"
-      x-middleware: ["middleware-name1.requireAuth"]
+      x-middleware:
+        - "middleware-name1.requireAuth"
       tags:
         - /test
       description:
@@ -39,23 +40,30 @@ paths:
       responses
 ```
 
-How to set up routes with express
+## How to set up routes with express
 
 ```javascript
 const YAML = require('yaml-js');
-const swagger = require('@coldrift/swagger-router-express');
+const swaggerRouter = require('@coldrift/swagger-router-express');
 
 const app = express();
-const swaggerDocument = YAML.load(fs.readFileSync(path.join(__dirname, '../swagger.yaml')))
+const swaggerDocument = YAML.load(fs.readFileSync(path.join(__dirname, './swagger.yaml')))
 
-const useBasePath = true; // whether to use the basePath from the swagger document when setting up the routes (defaults to false)
+// this makes the module use the basePath from the swagger document
+// when setting up the routes (defaults to false). Makes sense if
+// you are attaching swagger router to a nester router
+const useBasePath = true;
+
 const middlewareObj = {
     'middleware-name1': require('./middleware/middleware-name1'),
     'controller-name1': require('./controllers/controller-name1'),
     'controller-name2': require('./controllers/controller-name2')
 };
-swagger.setUpRoutes(middlewareObj, app, swaggerDocument, useBasePath);
+
+swaggerRouter.setUpRoutes(middlewareObj, app, swaggerDocument, useBasePath);
 ```
+
+## Example of controllers and middleware
 
 Example of a controller `controllers/controller-name1.js`
 
@@ -65,7 +73,7 @@ Example of a controller `controllers/controller-name1.js`
 export.test = (req, res) => res.json({success: true});
 ```
 
-Example of a middleware  `middleware/middleware-name1.js`
+Example of a middleware `middleware/middleware-name1.js`
 
 ```javascript
 'use strict';
@@ -79,3 +87,7 @@ export.requireAuth = (req, res, next) => {
 }
 
 ```
+
+## License
+
+MIT
