@@ -36,14 +36,14 @@ const setUpRoutes = (middlewareObj, router, swaggerDoc, useBasePath) => {
 
               const middlewareFunctions = map(middlewarePaths, p => get(middlewareObj, p));
 
-              router[verb](resource, middlewareFunctions, controllerFunction);
+              router[verb](fullPath, middlewareFunctions, controllerFunction);
             }
             else {
               throw Error(`Invalid middleware path(s): ${middlewarePath}`);
             }
           }
           else {
-            router[verb](resource, controllerFunction);
+            router[verb](fullPath, controllerFunction);
           }
         }
         else {
