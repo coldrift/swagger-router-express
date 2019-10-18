@@ -70,7 +70,7 @@ Example of a controller `controllers/controller-name1.js`
 ```javascript
 'use strict';
 
-export.test = (req, res) => res.json({success: true});
+exports.test = (req, res) => res.json({success: true});
 ```
 
 Example of a middleware `middleware/middleware-name1.js`
@@ -78,7 +78,7 @@ Example of a middleware `middleware/middleware-name1.js`
 ```javascript
 'use strict';
 
-export.requireAuth = (req, res, next) => {
+exports.requireAuth = (req, res, next) => {
   if(!res.headers["authorization"]) {
     return res.status(401);
   }
