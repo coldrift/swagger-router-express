@@ -90,4 +90,7 @@ exports.requireAuth = (req, res, next) => {
 
 ## License
 
-MIT
+Licensed under MIT License. Copyright (C) 2019 Coldrift Technologies B.V. All rights reserved.
+
+## Maintenance and support
+[Visit the company's website](https://coldrift.com/)
