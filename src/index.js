@@ -1,6 +1,8 @@
 
 import { forEach, has, get, isString, isArray, split, filter, isEmpty, map } from 'lodash';
 
+const paramRegex = new RegExp("{(.*?)\}", "g");
+
 const setUpRoutes = (middlewareObj, router, swaggerDoc, useBasePath) => {
 
   const basePath = useBasePath ? swaggerDoc.basePath : '';
@@ -12,7 +14,7 @@ const setUpRoutes = (middlewareObj, router, swaggerDoc, useBasePath) => {
         throw Error(`Invalid controller path: ${key}`)
       }
 
-      const fullPath = basePath + key;
+      const fullPath = basePath + key.replace(paramRegex, (m, p) => ':' + p);
       const controllerPath = get(route, 'x-controller');
       const middlewarePath = get(route, 'x-middleware');
 

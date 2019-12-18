@@ -12,7 +12,7 @@ $ npm install --save @coldrift/swagger-router-express
 
 ## Example Swagger file
 
-The following sample code will set up a **GET** endpoint with URL **http://localhost:8000/api/v1/test1** bound to the function named **test** in the controller module **controller-name1** proxied by middleware function **requireAuth** in middleware module **middleware-name1**.
+The following sample code will set up a **GET** endpoint with URL **http://localhost:8000/api/v1/test1** bound to the function named **test** in the controller module **controller1** proxied by middleware function **requireAuth** in middleware module **middleware1**.
 
 Swagger document `swagger.json`
 
@@ -30,14 +30,14 @@ produces:
 paths:
   /test1:
     get:
-      x-controller: "controller-name1.test"
+      x-controller: "controller1.test"
       x-middleware:
-        - "middleware-name1.requireAuth"
+        - "middleware1.requireAuth"
       tags:
         - /test
       description:
       parameters:
-      responses
+      responses:
 ```
 
 ## How to set up routes with express
@@ -55,9 +55,9 @@ const swaggerDocument = YAML.load(fs.readFileSync(path.join(__dirname, './swagge
 const useBasePath = true;
 
 const middlewareObj = {
-    'middleware-name1': require('./middleware/middleware-name1'),
-    'controller-name1': require('./controllers/controller-name1'),
-    'controller-name2': require('./controllers/controller-name2')
+    middleware1: require('./middleware/middleware1'),
+    controller1: require('./controllers/controller1'),
+    controller2: require('./controllers/controller2')
 };
 
 swaggerRouter.setUpRoutes(middlewareObj, app, swaggerDocument, useBasePath);
@@ -65,7 +65,7 @@ swaggerRouter.setUpRoutes(middlewareObj, app, swaggerDocument, useBasePath);
 
 ## Example of controllers and middleware
 
-Example of a controller `controllers/controller-name1.js`
+Example of a controller `controllers/controller1.js`
 
 ```javascript
 'use strict';
@@ -73,7 +73,7 @@ Example of a controller `controllers/controller-name1.js`
 exports.test = (req, res) => res.json({success: true});
 ```
 
-Example of a middleware `middleware/middleware-name1.js`
+Example of a middleware `middleware/middleware1.js`
 
 ```javascript
 'use strict';
